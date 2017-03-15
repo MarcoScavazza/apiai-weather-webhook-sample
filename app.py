@@ -33,7 +33,7 @@ def webhook():
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
-
+ 
 
 def processRequest(req):
     if req.get("result").get("action") != "yahooWeatherForecast":
@@ -84,8 +84,8 @@ def makeWebhookResult(data):
 
     # print(json.dumps(item, indent=4))
 
-    speech = "Today in " + location.get('city') + ": " + condition.get('text') + \
-             ", the temperature is " + condition.get('temp') + " " + units.get('temperature')
+    speech = "Oggi ad " + location.get('city') + ": " + condition.get('text') + \
+             ", la temperatura è di " + condition.get('temp') + " " + units.get('temperature')
 
     print("Response:")
     print(speech)
