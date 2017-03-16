@@ -38,26 +38,18 @@ def webhook():
 
 
 def processRequest(req):
-    if req.get("result").get("action") != "yahooWeatherForecast":
-        return {}
-    baseurl = "https://query.yahooapis.com/v1/public/yql?"
-    yql_query = makeYqlQuery(req)
-    if yql_query is None:
-        return {}
-    yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
-    result = urlopen(yql_url).read()
-    data = json.loads(result)
-    res = makeWebhookResult(data)
-    return res
-    if req.get("result").get("action") != "test":
-        return {}
-    return {
-        "speech": "Se nel mondo...",
-        "displayText": "Se nel mondo...",
-        # "data": data,
-        # "contextOut": [],
-        "source": "apiai-weather-webhook-sample"
-    }
+    if req.get("result").get("action") == "yahooWeatherForecast":
+        baseurl = "https://query.yahooapis.com/v1/public/yql?"
+        yql_query = makeYqlQuery(req)
+        if yql_query is None:
+            return {}
+        yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
+        result = urlopen(yql_url).read()
+        data = json.loads(result)
+        res = makeWebhookResult(data)
+        return res
+    if req.get("result").get("action") == "test":
+        return fakeWebhookResult
 
 
 
@@ -109,6 +101,16 @@ def makeWebhookResult(data):
     return {
         "speech": speech,
         "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample"
+    }
+
+
+def fakeWebhookResult():
+    return {
+        "speech": "ZIO",
+        "displayText": "ZIO",
         # "data": data,
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample"
