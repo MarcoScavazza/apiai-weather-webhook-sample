@@ -71,7 +71,7 @@ def makeWebhookResult(data):
     channel = result.get('channel')
     if channel is None:
         return {}
-
+ 
     item = channel.get('item')
     location = channel.get('location')
     units = channel.get('units')
@@ -84,10 +84,12 @@ def makeWebhookResult(data):
 
     # print(json.dumps(item, indent=4))
 
+    celsius = (int(condition.get('temp')) - 32) * 5.0/9.0
     speech = "Oggi ad " + location.get('city') + ": " + condition.get('text') + \
-             ", la temperatura: " + condition.get('temp') + " " + units.get('temperature')
+             ", la temperatura: " + celsius
 
 
+ 
     print("Response:")
     print(speech)
 
