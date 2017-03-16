@@ -18,16 +18,6 @@ from flask import make_response
 # Flask app should start in global layout
 app = Flask(__name__)
 
-def convert_f2c(S):
-        """(str): float
-        Converts a Fahrenheit temperature represented as a string
-        to a Celsius temperature.
-        """
-        fahrenheit = float(S)
-        celsius = (fahrenheit - 32) * 5 / 9
-        return celsius
-
-
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -43,6 +33,14 @@ def webhook():
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
+
+
+
+def convert_f2c(temperat):
+    fahrenheit = float(temperat)
+    celsius = (fahrenheit - 32) * 5 / 9
+    return celsius
+
 
 
 def processRequest(req):
@@ -99,7 +97,7 @@ def makeWebhookResult(data):
 
     temp = str(condition.get('temp'))
     speech = "Oggi ad " + location.get('city') + ": " + condition.get('text') + \
-    ", la temperatura: " + convert_f2c(temp) + " ZIO!"
+    ", la temperatura: " + condition.get('temp') + " ZIO!"
 
     print("Response:")
     print(speech)
@@ -115,7 +113,5 @@ def makeWebhookResult(data):
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
-
     print("Starting app on port %d" % port)
-
     app.run(debug=False, port=port, host='0.0.0.0')
