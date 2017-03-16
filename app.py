@@ -36,12 +36,6 @@ def webhook():
 
 
 
-def convert_f2c(temperat):
-    fahrenheit = float(temperat)
-    celsius = (fahrenheit - 32) * 5 / 9
-    return celsius
-
-
 
 def processRequest(req):
     if req.get("result").get("action") != "yahooWeatherForecast":
@@ -95,7 +89,7 @@ def makeWebhookResult(data):
     #speech = "Oggi ad " + location.get('city') + ": " + condition.get('text') + \
     #         ", la temperatura: " + celsius + " " + units.get('temperature')
 
-    temp = str(condition.get('temp'))
+
     speech = "Oggi ad " + location.get('city') + ": " + condition.get('text') + \
     ", la temperatura: " + condition.get('temp') + " ZIO!"
 
