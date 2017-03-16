@@ -49,7 +49,7 @@ def processRequest(req):
         res = makeWebhookResult(data)
         return res
     if req.get("result").get("action") == "test":
-        return fakeWebhookResult
+        return fakeWebhookResult()
 
 
 
