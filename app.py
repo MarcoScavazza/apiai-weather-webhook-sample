@@ -100,9 +100,9 @@ def makeWebhookResult(data):
         celsius = (fahrenheit - 32) * 5 / 9
         return celsius
 
-    
+
     speech = "Oggi ad " + location.get('city') + ": " + condition.get('text') + \
-            ", la temperatura: " + convert_f2c(temp) + " ZIO!" 
+    ", la temperatura: " + convert_f2c(temp) + " ZIO!"
 
     print("Response:")
     print(speech)
