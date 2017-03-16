@@ -49,18 +49,15 @@ def processRequest(req):
     data = json.loads(result)
     res = makeWebhookResult(data)
     return res
-    # Secondo
     if req.get("result").get("action") != "test":
         return {}
-    baseurl = "https://query.yahooapis.com/v1/public/yql?"
-    yql_query = makeYqlQuery(req)
-    if yql_query is None:
-        return {}
-    yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
-    result = urlopen(yql_url).read()
-    data = json.loads(result)
-    res = makeWebhookResult(data)
-    return res
+    return {
+        "speech": "Se nel mondo...",
+        "displayText": "Se nel mondo...",
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample"
+    }
 
 
 
@@ -122,16 +119,3 @@ if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
     print("Starting app on port %d" % port)
     app.run(debug=False, port=port, host='0.0.0.0')
-
-
-
-def crweateWHres():
-    speech = "Se nel mondo vuoi portare la magia del Natale, più forte che puoi devi cantare!!! "
-
-    return {
-        "speech": speech,
-        "displayText": speech,
-        # "data": data,
-        # "contextOut": [],
-        "source": "apiai-weather-webhook-sample"
-    }
