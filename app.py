@@ -91,7 +91,7 @@ def makeWebhookResult(data):
 
 
     speech = "Oggi ad " + location.get('city') + ": " + condition.get('text') + \
-    ", la temperatura: " + condition.get('temp')/2 + " K"
+    ", la temperatura: " + condition.get('temp') + " K"
 
     print("Response:")
     print(speech)
