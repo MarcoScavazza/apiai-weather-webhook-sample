@@ -87,9 +87,22 @@ def makeWebhookResult(data):
     #speech = "Oggi ad " + location.get('city') + ": " + condition.get('text') + \
     #         ", la temperatura: " + celsius + " " + units.get('temperature')
 
-    tempo = condition.get('temp')
+    temp = str(condition.get('temp'))
+
+
+    def convert_f2c(S):
+        """(str): float
+
+        Converts a Fahrenheit temperature represented as a string
+        to a Celsius temperature.
+        """
+        fahrenheit = float(S)
+        celsius = (fahrenheit - 32) * 5 / 9
+        return celsius
+
+    
     speech = "Oggi ad " + location.get('city') + ": " + condition.get('text') + \
-            ", la temperatura: " + tempo + " " + type(tempo)
+            ", la temperatura: " + convert_f2c(temp) + " ZIO!" 
 
     print("Response:")
     print(speech)
