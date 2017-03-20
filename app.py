@@ -35,8 +35,6 @@ def webhook():
     return r
 
 
-
-
 def processRequest(req):
     print("PARAMETRO ---- " + req.get("result").get("action"))
     if req.get("result").get("action") == "yahooWeatherForecast":
