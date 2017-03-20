@@ -51,9 +51,7 @@ def processRequest(req):
         res = makeWebhookResult(data)
         return res
     if req.get("result").get("action") == "test":
-        locale.setlocale(locale.LC_ALL, 'it_IT.UTF-8')
-        oggi = str(time.strftime("%A %d %B %y"))
-        frase="Amicone oggi è " + oggi
+        frase="Amicone oggi è " 
         return fakeWebhookResult(frase)
 
 
