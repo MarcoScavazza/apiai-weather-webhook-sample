@@ -51,8 +51,8 @@ def processRequest(req):
         res = makeWebhookResult(data)
         return res
     if req.get("result").get("action") == "test":
-        frase="Amicone oggi è " 
-        return fakeWebhookResult(frase)
+
+        return fakeWebhookResult("frase")
 
 
 
