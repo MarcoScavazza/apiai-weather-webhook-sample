@@ -109,11 +109,9 @@ def makeWebhookResult(data):
 
 
 def fakeWebhookResult():
-    oggi = time.strftime("%A %d %B %y")
-    frase="Amicone oggi è "+oggi
     return {
-        "speech": frase,
-        "displayText": frase,
+        "speech": "ok",
+        "displayText": "ok",
         # "data": data,
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample"
