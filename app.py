@@ -9,6 +9,7 @@ from urllib.request import urlopen, Request
 from urllib.error import HTTPError
 
 import json
+import time
 import os
 
 from flask import Flask
@@ -108,9 +109,11 @@ def makeWebhookResult(data):
 
 
 def fakeWebhookResult():
+    oggi = time.strftime("%A %d %B %y")
+    frase="Amicone oggi è "+oggi
     return {
-        "speech": "ZIO",
-        "displayText": "ZIO",
+        "speech": frase,
+        "displayText": frase,
         # "data": data,
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample"
