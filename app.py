@@ -10,6 +10,7 @@ from urllib.error import HTTPError
 
 import json
 import time
+import locale
 import os
 
 from flask import Flask
@@ -50,7 +51,10 @@ def processRequest(req):
         res = makeWebhookResult(data)
         return res
     if req.get("result").get("action") == "test":
-        return fakeWebhookResult()
+        locale.setlocale(locale.LC_ALL, 'it_IT.UTF-8')
+        oggi = str(time.strftime("%A %d %B %y"))
+        frase="Amicone oggi è " + oggi
+        return fakeWebhookResult(frase)
 
 
 
@@ -108,10 +112,10 @@ def makeWebhookResult(data):
     }
 
 
-def fakeWebhookResult():
+def fakeWebhookResult(frase):
     return {
-        "speech": "ok",
-        "displayText": "ok",
+        "speech": frase,
+        "displayText": frase,
         # "data": data,
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample"
