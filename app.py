@@ -50,11 +50,11 @@ def processRequest(req):
         print(data)
         res = makeWebhookResult(data)
         return res
-    if req.get("result").get("action") == "test":
+    if req.get("result").get("action") == "date":
         locale.setlocale(locale.LC_ALL, 'it_IT.UTF-8')
         oggi = str(time.strftime("%A %d %B %Y"))
         frase="Amicone oggi e' " +oggi
-        return fakeWebhookResult(frase)
+        return dateWebhookResult(frase)
 
 
 
@@ -112,12 +112,10 @@ def makeWebhookResult(data):
     }
 
 
-def fakeWebhookResult(frase):
+def dateWebhookResult(frase):
     return {
         "speech": frase,
         "displayText": frase,
-        # "data": data,
-        # "contextOut": [],
         "source": "apiai-weather-webhook-sample"
     }
 
