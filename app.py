@@ -17,8 +17,31 @@ from flask import Flask
 from flask import request
 from flask import make_response
 
+from flask.ext.mail import Mail
+from flask.ext.mail import Message
+
+
 # Flask app should start in global layout
 app = Flask(__name__)
+
+app.config.update(dict(
+    DEBUG = True,
+    MAIL_SERVER = 'smtp.gmail.com',
+    MAIL_PORT = 465,
+    MAIL_USE_TLS = False,
+    MAIL_USE_SSL = True,
+    MAIL_USERNAME = 'giulio.scavazza2@gmail.com',
+    MAIL_PASSWORD = 'lanugine',
+))
+
+mail = Mail(app)
+msg = Message(
+          'Hello',
+       sender = 'xxx@xxx.com',
+       recipients = ['xxx@xxx.com'])
+msg.body = "This is the email body"
+msg.html = '<b>HTML</b> body 1234'
+
 
 
 @app.route('/webhook', methods=['POST'])
@@ -54,6 +77,8 @@ def processRequest(req):
         locale.setlocale(locale.LC_ALL, 'it_IT.UTF-8')
         oggi = str(time.strftime("%A %d %B %Y"))
         frase="Amicone oggi e' " +oggi
+        with app.app_context():
+            mail.send(msg)
         return fakeWebhookResult(frase)
 
 
@@ -113,6 +138,8 @@ def makeWebhookResult(data):
 
 
 def fakeWebhookResult(frase):
+
+
     return {
         "speech": frase,
         "displayText": frase,
