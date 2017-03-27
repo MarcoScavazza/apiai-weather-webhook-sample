@@ -39,6 +39,15 @@ def webhook():
 
 def processRequest(req):
     print("PARAMETRO ---- " + req.get("result").get("action"))
+    if req.get("result").get("action") == "date":
+        print("LOCALE1")
+        locale.setlocale(locale.LC_ALL, 'it_IT.UTF-8')
+        print("LOCALE")
+        oggi = str(time.strftime("%A %d %B %Y"))
+        print("oggi "+oggi)
+        frase = "Amicone oggi e' " + oggi
+        print("frase "+oggi)
+        return dateWebhookResult(frase)
     if req.get("result").get("action") == "yahooWeatherForecast":
         baseurl = "https://query.yahooapis.com/v1/public/yql?"
         yql_query = makeYqlQuery(req)
@@ -50,15 +59,7 @@ def processRequest(req):
         print(data)
         res = makeWebhookResult(data)
         return res
-    if req.get("result").get("action") == "date":
-        print("LOCALE1")
-        locale.setlocale(locale.LC_ALL, 'it_IT.UTF-8')
-        print("LOCALE")
-        oggi = str(time.strftime("%A %d %B %Y"))
-        print("oggi "+oggi)
-        frase = "Amicone oggi e' " + oggi
-        print("frase "+oggi)
-        return dateWebhookResult(frase)
+
 
 
 
