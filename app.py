@@ -51,6 +51,7 @@ def processRequest(req):
         res = makeWebhookResult(data)
         return res
     if req.get("result").get("action") == "date":
+        print("LOCALE1")
         locale.setlocale(locale.LC_ALL, 'it_IT.UTF-8')
         print("LOCALE")
         oggi = str(time.strftime("%A %d %B %Y"))
