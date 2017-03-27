@@ -41,7 +41,7 @@ def processRequest(req):
     print("PARAMETRO ---- " + req.get("result").get("action"))
     if req.get("result").get("action") == "date":
         print("LOCALE1")
-        locale.setlocale(locale.LC_ALL, 'it_IT.UTF-8')
+        #locale.setlocale(locale.LC_ALL, 'it_IT.UTF-8')
         print("LOCALE")
         oggi = str(time.strftime("%A %d %B %Y"))
         print("oggi "+oggi)
